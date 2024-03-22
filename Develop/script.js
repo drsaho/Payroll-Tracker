@@ -3,47 +3,52 @@ const addEmployeesBtn = document.querySelector('#add-employees-btn');
 
 // Collect employee data
 const collectEmployees = function() {
-  // TODO: Get user input to create and return an array of employee objects
+  const employees = [];
+  let addMoreEmployees = true;
 
-  const employeesArray =[];
-  const numEmployees = parseInt(prompt("Enter the number of employees:"));
+  while (addMoreEmployees) {
+    const firstName = prompt("Enter employee's first name:");
+    const lastName = prompt("Enter employee's last name:");
+    const salary = parseFloat(prompt("Enter employee's salary:"));
 
-  for (let i = 0; i < numEmployees; i++) {
-    const firstName = prompt(`First Name ${i+1}:`);
-    const lastName = prompt(`Last Name ${i+1}:`);
-    const salary = parseFloat(prompt(`Salary ${i+1}:`));
-
-    //employee object//
-
+    // Create employee object
     const employee = {
       firstName: firstName,
       lastName: lastName,
       salary: salary
     };
-     // Push the employee object into the array
-     employeesArray.push(employee);
+
+    // Add employee to array
+    employees.push(employee);
+
+    // Ask user if they want to add more employees
+    const continueAdding = confirm("Do you want to add another employee?");
+    if (!continueAdding) {
+      addMoreEmployees = false;
     }
-  
-    return employeesArray; // Return the array of employee objects
   }
-  
+
+  return employees;
+}
 
 
-// Display the average salary
+
+// Average salary
 const displayAverageSalary = function(employeesArray) {
   // TODO: Calculate and display the average salary
+
   let totalSalary = 0;
 
-  // Calculate total salary
+  // Total salary
   for (let i = 0; i < employeesArray.length; i++) {
     totalSalary += employeesArray[i].salary;
   }
 
-  // Calculate average salary
+  // Average average salary
   const averageSalary = totalSalary / employeesArray.length;
 
   // Display average salary
-  console.log("The Average Salary: ", averageSalary.toLocaleString("en-US", {
+  console.log("The Average Salary is: ", averageSalary.toLocaleString("en-US", {
     style: "currency",
     currency: "USD"
   }));
@@ -53,6 +58,7 @@ const displayAverageSalary = function(employeesArray) {
 // Select a random employee
 const getRandomEmployee = function(employeesArray) {
   // TODO: Select and display a random employee
+
   const getRandomEmployee = function(employeesArray) {
     // Generate a random index within the range of the employeesArray length
     const randomIndex = Math.floor(Math.random() * employeesArray.length);
